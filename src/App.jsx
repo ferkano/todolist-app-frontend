@@ -15,7 +15,7 @@ function App() {
   const [password, setPassword] = useState("");
   const [user, setUser] = useState("");
   const [name, setName] = useState("");
-  const [lastname, setlastname] = useState();
+  const [lastname, setLastname] = useState();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -24,9 +24,8 @@ function App() {
       const user = await serviceLogin.login({ username, password });
 
       setUser(user);
-      setPassword("");
       setUsername("");
-      console.log("check");
+      setPassword("");
     } catch (err) {
       setErrorMessage("Wrong credentials");
       setTimeout(() => {
@@ -46,8 +45,15 @@ function App() {
         password,
       });
       setUser(addUser.data);
+      setUsername("");
+      setPassword("");
+      setLastname("");
+      setName("");
     } catch (err) {
-      console.error(err);
+      setErrorMessage(err.response.data.error);
+      setTimeout(() => {
+        setErrorMessage(null);
+      }, 5000);
     }
   };
 
@@ -57,6 +63,8 @@ function App() {
     setUser("");
     setPassword("");
     setUsername("");
+    setName("");
+    setLastname("");
   };
 
   const handleButtonSignIn = (e) => {
@@ -65,6 +73,8 @@ function App() {
     setUser("");
     setPassword("");
     setUsername("");
+    setName("");
+    setLastname("");
   };
 
   return (
@@ -78,7 +88,7 @@ function App() {
       <Notification message={errorMessage} />
       {login === true && (
         <LoginForm
-          userName={username}
+          username={username}
           password={password}
           handleUsernameChange={(e) => setUsername(e.target.value)}
           handlePasswordChange={(e) => setPassword(e.target.value)}
@@ -95,7 +105,7 @@ function App() {
           handleUsernameChange={(e) => setUsername(e.target.value)}
           handlePasswordChange={(e) => setPassword(e.target.value)}
           handleNameChange={(e) => setName(e.target.value)}
-          handleLastnameChange={(e) => setlastname(e.target.value)}
+          handleLastnameChange={(e) => setLastname(e.target.value)}
         />
       )}
     </div>
