@@ -1,0 +1,29 @@
+@import "../variables";
+
+.container-title-addnote {
+  display: flex;
+  justify-content: space-between;
+}
+.form-container-addnote {
+  display: flex;
+  justify-content: center;
+  margin-block-start: 1rem;
+  form {
+    width: 63%;
+    .form-label {
+      font-size: 2rem;
+    }
+    input {
+      font-size: 1.2rem;
+    }
+    button {
+      width: 70%;
+    }
+    .container-send {
+      margin-block-start: 3rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

@@ -1,0 +1,26 @@
+@import "../variables";
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 4rem 0 4rem;
+  width: 100vw;
+  background-color: $colorSecundary;
+  color: $colorBackground;
+  box-shadow: 5px -15px 70px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 5px -15px 70px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 5px -15px 70px 0px rgba(0, 0, 0, 0.75);
+  .navbar__buttons {
+    display: flex;
+    width: 50%;
+    .navbar__buttons--ul {
+      display: flex;
+      display: flex;
+      width: 100%;
+      justify-content: space-evenly;
+      li {
+        list-style: none;
+      }
+    }
+  }
+}

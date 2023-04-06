@@ -1,0 +1,19 @@
+@import "../variables";
+
+.td-title {
+  width: 80%;
+}
+.td-icon {
+  width: 20%;
+  td {
+    div {
+      .td-icon__icon {
+        font-size: 1.8rem;
+      }
+    }
+  }
+}
+.check {
+  text-decoration: line-through;
+  opacity: 0.5;
+}

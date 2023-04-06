@@ -1,0 +1,26 @@
+@import "../variables";
+
+.container-note {
+  margin-block-start: 6rem;
+  width: 100vw;
+  padding: 0 2rem;
+  .container-note__add-note {
+    display: flex;
+    padding: 0 5rem;
+  }
+  h2 {
+    margin-block-end: 3rem;
+    text-align: center;
+  }
+  .addNote:hover {
+    cursor: pointer;
+  }
+  .table-notes {
+    width: 100%;
+    font-size: 1.4rem;
+    margin-block-start: 2rem;
+    .table-notes__tbody {
+      width: 100%;
+    }
+  }
+}

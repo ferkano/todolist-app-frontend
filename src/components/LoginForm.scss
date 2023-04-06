@@ -1,0 +1,26 @@
+@import "../variables";
+
+.form-container {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  margin-block-start: 10rem;
+  form {
+    width: 63%;
+    .form-label {
+      font-size: 2rem;
+    }
+    input {
+      font-size: 1.2rem;
+    }
+    button {
+      width: 70%;
+    }
+    .container-button {
+      margin-block-start: 3rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
