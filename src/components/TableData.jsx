@@ -30,9 +30,7 @@ const TableData = ({
     setId(e.target.id);
     setPutNote(false);
     if (confirm("estas seguro de eliminar la nota")) {
-      console.log(id);
       deleteNote(id);
-      console.log(notes);
       const newData = notes.filter((note) => note._id != id);
       setNotes(newData);
     }

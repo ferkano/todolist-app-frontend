@@ -1,9 +1,10 @@
 import React from "react";
+import "./Notification.scss";
 
 const Notification = ({ message }) => {
   return (
-    <div>
-      <h3>{message}</h3>
+    <div className="d-flex justify-content-center alert alert-danger">
+      {message}
     </div>
   );
 };

@@ -1,22 +1,24 @@
 import React, { useState } from "react";
 import "./LoginForm.scss";
-import { Formik } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 
 const LoginForm = ({ handleLogin }) => {
+  const [formularioSend, setFormularioSend] = useState(false);
+
   return (
     <div className="form-container">
       <Formik
+        validateOnChange={false}
         initialValues={{
           username: "",
           password: "",
         }}
-        validateOnChange={false}
         validate={(valores) => {
           let errores = {};
 
           //validation username
           if (!valores.username) {
-            errores.username = "Please enter username";
+            errores.username = "Por favor ingresa un nombre";
           }
           // } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.username)) {
           //   errores.username = "El nombre solo puede tener letras y espacios ";
@@ -24,7 +26,7 @@ const LoginForm = ({ handleLogin }) => {
 
           //validation password
           if (!valores.password) {
-            errores.password = "Please enter password";
+            errores.password = "Por favor ingresa password";
           }
 
           return errores;
@@ -35,15 +37,9 @@ const LoginForm = ({ handleLogin }) => {
           console.log("formulario enviado");
         }}
       >
-        {({
-          values,
-          errors,
-          touched,
-          handleSubmit,
-          handleChange,
-          handleBlur,
-        }) => (
-          <form onSubmit={handleSubmit}>
+        {({ errors, handleChange, handleBlur, values }) => (
+          <Form>
+            {console.log(errors)}
             <div className="mb-3">
               <label htmlFor="username" className="form-label">
                 Username
@@ -57,10 +53,10 @@ const LoginForm = ({ handleLogin }) => {
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-
-              {touched.username && errors.username && (
-                <div className="alert alert-danger">{errors.username}</div>
-              )}
+              <ErrorMessage
+                name="username"
+                component={() => <div>{errors.username}</div>}
+              />
             </div>
             <div class="mb-3">
               <label htmlFor="password" className="form-label">
@@ -75,17 +71,18 @@ const LoginForm = ({ handleLogin }) => {
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-
-              {touched.password && errors.password && (
-                <div className="alert alert-danger">{errors.password}</div>
-              )}
+              <ErrorMessage
+                name="password"
+                component={() => <div>{errors.password}</div>}
+              />
             </div>
             <div className="container-button">
               <button type="submit" className="btn btn-primary">
                 Login
               </button>
             </div>
-          </form>
+            {formularioSend && <p>Formulario enviado con exito!</p>}
+          </Form>
         )}
       </Formik>
     </div>

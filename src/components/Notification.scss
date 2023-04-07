@@ -1,0 +1,10 @@
+@import "../variables";
+
+.container-notification {
+  display: flex;
+  justify-content: center;
+  margin: 0.5rem 0 0 0;
+  .container-notification__message {
+    font-size: 2rem;
+  }
+}

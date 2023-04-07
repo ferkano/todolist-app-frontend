@@ -36,7 +36,6 @@ const Notes = ({
     setTitle(""), setPutNote(false);
   };
 
-  console.log(notes);
   return (
     <div className="container-note">
       <h2 className="">{`Welcome ${

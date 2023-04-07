@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.scss";
 import LoginForm from "./components/LoginForm";
 import Navbar from "./components/Navbar";
@@ -14,10 +14,7 @@ function App() {
   const [signIn, setsignIn] = useState("");
   const [login, setLogin] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [lastname, setLastname] = useState("");
+
   const [user, setUser] = useState("");
   const [sectionStarted, setSectionStarted] = useState(false);
   const [notes, setNotes] = useState([]);
@@ -27,19 +24,31 @@ function App() {
   const [id, setId] = useState("");
   const [status, setStatus] = useState("");
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-
-    try {
-      const user = await serviceLogin.login({ username, password });
-
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem("loggedUser");
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON);
       console.log(user);
+      setUser(user);
+      serviceNotes.setToken(user.token);
+      setErrorMessage("");
+      setLogin(false);
+      setSectionStarted(true);
+    }
+  }, []);
+
+  const handleLogin = async (usernames, passwords) => {
+    try {
+      const user = await serviceLogin.login({
+        username: usernames,
+        password: passwords,
+      });
+
+      window.localStorage.setItem("loggedUser", JSON.stringify(user));
 
       serviceNotes.setToken(user.token);
 
       setUser(user);
-      setUsername("");
-      setPassword("");
       setErrorMessage("");
       setLogin(false);
       setSectionStarted(true);
@@ -48,25 +57,20 @@ function App() {
       setErrorMessage("Wrong credentials");
       setTimeout(() => {
         setErrorMessage(null);
-      }, 5000);
+      }, 3000);
     }
   };
 
-  const handleSingIn = async (e) => {
-    e.preventDefault();
-
+  const handleSingIn = async (usernames, names, lastnames, passwords) => {
     try {
       const addUser = await serviceUser.userPost({
-        username,
-        name,
-        lastname,
-        password,
+        username: usernames,
+        name: names,
+        lastname: lastnames,
+        password: passwords,
       });
       setUser(addUser.data);
-      setUsername("");
-      setPassword("");
-      setLastname("");
-      setName("");
+      setSectionStarted(true);
       setsignIn(false);
     } catch (err) {
       setErrorMessage(err.response.data.error);
@@ -80,26 +84,19 @@ function App() {
     setsignIn(false);
     setLogin(true);
     setUser("");
-    setPassword("");
-    setUsername("");
-    setName("");
-    setLastname("");
   };
 
   const handleButtonSignIn = (e) => {
     setsignIn(true);
     setLogin(false);
     setUser("");
-    setPassword("");
-    setUsername("");
-    setName("");
-    setLastname("");
   };
 
   const handleLogout = (e) => {
+    setNotes([]);
     setUser("");
     setSectionStarted(false);
-    console.log(sectionStarted);
+    window.localStorage.removeItem("loggedUser");
   };
 
   const addNote = (noteObject) => {
@@ -139,28 +136,8 @@ function App() {
       />
       {errorMessage && <Notification message={errorMessage} />}
 
-      {login === true && (
-        <LoginForm
-          username={username}
-          password={password}
-          handleUsernameChange={(e) => setUsername(e.target.value)}
-          handlePasswordChange={(e) => setPassword(e.target.value)}
-          handleLogin={handleLogin}
-        />
-      )}
-      {signIn === true && (
-        <SignInForm
-          handleSingIn={handleSingIn}
-          userName={username}
-          password={password}
-          name={name}
-          lastname={lastname}
-          handleUsernameChange={(e) => setUsername(e.target.value)}
-          handlePasswordChange={(e) => setPassword(e.target.value)}
-          handleNameChange={(e) => setName(e.target.value)}
-          handleLastnameChange={(e) => setLastname(e.target.value)}
-        />
-      )}
+      {login === true && <LoginForm handleLogin={handleLogin} />}
+      {signIn === true && <SignInForm handleSingIn={handleSingIn} />}
       {user && (
         <Notes
           status={status}
