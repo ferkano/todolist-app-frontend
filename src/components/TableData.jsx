@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./TableData.scss";
+import { useThemeContext } from "../context/ThemeContext";
 
 const TableData = ({
   note,
@@ -14,6 +15,8 @@ const TableData = ({
   updateNote,
   setStatus,
 }) => {
+  const { contextTheme, setContextTheme } = useThemeContext();
+
   const handleUpdate = (e) => {
     setViewForm(false);
     setId(e.target.id);
@@ -63,17 +66,33 @@ const TableData = ({
       </td>
       <div className="td-icon">
         <td>
-          <div className="btn btn-secondary" id={id} onClick={handleUpdate}>
+          <div
+            className={
+              contextTheme === "Dark"
+                ? "btn btn-secondary buttonDark"
+                : "btn btn-secondary"
+            }
+            id={id}
+            onClick={handleUpdate}
+          >
             <i
-              class="bi bi-pen td-icon__icon"
+              className="bi bi-pen td-icon__icon"
               id={id}
               onClick={handleUpdate}
             ></i>
           </div>
         </td>
         <td>
-          <div className="btn btn-secondary" id={id} onClick={handleDelete}>
-            <i class="bi bi-x-circle td-icon__icon"></i>
+          <div
+            className={
+              contextTheme === "Dark"
+                ? "btn btn-secondary buttonDark"
+                : "btn btn-secondary"
+            }
+            id={id}
+            onClick={handleDelete}
+          >
+            <i className="bi bi-x-circle td-icon__icon"></i>
           </div>
         </td>
       </div>

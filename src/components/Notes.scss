@@ -1,8 +1,7 @@
 @import "../variables";
 
 .container-note {
-  margin-block-start: 6rem;
-  width: 100vw;
+  width: 100%;
   padding: 0 2rem;
   .container-note__add-note {
     display: flex;
@@ -22,5 +21,14 @@
     .table-notes__tbody {
       width: 100%;
     }
+  }
+}
+
+@media (min-width: $breakpoint-tablet) {
+  .navbar__container-buttons {
+    width: 74%;
+  }
+  .container-note {
+    width: 55rem;
   }
 }

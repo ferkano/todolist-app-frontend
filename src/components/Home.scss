@@ -1,0 +1,72 @@
+@import "../variables";
+
+.home {
+  display: grid;
+  grid-gap: 1rem;
+
+  text-align: center;
+  width: 100%;
+  padding: 0 2rem 0 2rem;
+  p {
+    font-size: 1.3rem;
+  }
+  .home__img-home {
+    border-radius: 2rem;
+    border: 2px solid white;
+    width: 29rem;
+    -webkit-box-shadow: 29px 20px 191px -36px rgba(0, 0, 0, 0.35);
+    -moz-box-shadow: 29px 20px 191px -36px rgba(0, 0, 0, 0.35);
+    box-shadow: 29px 20px 191px -36px rgba(0, 0, 0, 0.35);
+  }
+}
+
+@media (min-width: $breakpoint-tablet) {
+  .home {
+    grid-template-areas:
+      "a a"
+      "b c"
+      "d e"
+      "f g"
+      "h i";
+
+    h2 {
+      grid-area: a;
+    }
+    p {
+      margin: auto;
+      font-size: 1.4rem;
+    }
+    .text-login {
+      grid-area: c;
+    }
+    .text-signin {
+      grid-area: d;
+    }
+    .text-addcheck {
+      grid-area: g;
+    }
+    .text-update {
+      grid-area: h;
+    }
+    .home__img-home {
+      width: 26rem;
+    }
+  }
+}
+@media (min-width: $breakpoint-desktop) {
+  .home {
+    width: 70%;
+    .text-login {
+      grid-area: b;
+    }
+    .text-signin {
+      grid-area: e;
+    }
+    .text-addcheck {
+      grid-area: f;
+    }
+    .text-update {
+      grid-area: i;
+    }
+  }
+} ;

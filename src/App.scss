@@ -19,12 +19,35 @@ html {
 h2 {
   font-size: 2rem;
 }
-.container-app {
-  height: 100vh;
-}
 
 .alert-danger {
   font-size: 1.3rem;
+}
+
+#Dark {
+  background-color: $colorSecundary;
+  color: white;
+}
+
+#Light {
+  background-color: $colorBackground;
+}
+
+.container-body {
+  height: 100%;
+  min-height: calc(100vh - 94px);
+  padding-block-end: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
+.dark {
+  background-color: $colorPrimaryDark;
+  color: white;
+}
+.light {
+  background-color: $colorSecundary;
+  color: white;
 }
 //custom BS
 

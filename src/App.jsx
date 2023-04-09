@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./App.scss";
 import LoginForm from "./components/LoginForm";
 import Navbar from "./components/Navbar";
@@ -8,7 +8,11 @@ import SignInForm from "./components/SignInForm";
 import serviceLogin from "./service/login";
 import serviceNotes from "./service/notes.js";
 
+import DarkModeToggle from "react-dark-mode-toggle";
+
 import serviceUser from "./service/user";
+import { ThemeContext, useThemeContext } from "./context/ThemeContext";
+import Home from "./components/Home";
 
 function App() {
   const [signIn, setsignIn] = useState("");
@@ -36,6 +40,8 @@ function App() {
       setSectionStarted(true);
     }
   }, []);
+
+  const { contextTheme, setContextTheme } = useThemeContext();
 
   const handleLogin = async (usernames, passwords) => {
     try {
@@ -97,6 +103,7 @@ function App() {
     setUser("");
     setSectionStarted(false);
     window.localStorage.removeItem("loggedUser");
+    setPutNote(false);
   };
 
   const addNote = (noteObject) => {
@@ -124,40 +131,57 @@ function App() {
     });
   };
 
+  const handleHome = () => {
+    setLogin(false);
+    setUser(false);
+    setsignIn(false);
+  };
+
   return (
-    <div className="App container-app">
+    <div className="App container-app" id={ThemeContext}>
       <Navbar
         login={login}
         signIn={signIn}
+        handleHome={handleHome}
         handleButtonLogin={handleButtonLogin}
         handleButtonSignIn={handleButtonSignIn}
         sectionStarted={sectionStarted}
         handleLogout={handleLogout}
       />
-      {errorMessage && <Notification message={errorMessage} />}
 
-      {login === true && <LoginForm handleLogin={handleLogin} />}
-      {signIn === true && <SignInForm handleSingIn={handleSingIn} />}
-      {user && (
-        <Notes
-          status={status}
-          setStatus={setStatus}
-          id={id}
-          setId={setId}
-          title={title}
-          setTitle={setTitle}
-          description={description}
-          setDescription={setDescription}
-          putNote={putNote}
-          setPutNote={setPutNote}
-          addNote={addNote}
-          updateNote={updateNote}
-          user={user}
-          notes={notes}
-          setNotes={setNotes}
-          deleteNote={deleteNote}
-        />
-      )}
+      <body className=" container-body  h-100 pt-5" id={contextTheme}>
+        {errorMessage && <Notification message={errorMessage} />}
+        {!login && !signIn && !user && <Home />}
+        {login === true && <LoginForm handleLogin={handleLogin} />}
+        {signIn === true && <SignInForm handleSingIn={handleSingIn} />}
+        {user && (
+          <Notes
+            status={status}
+            setStatus={setStatus}
+            id={id}
+            setId={setId}
+            title={title}
+            setTitle={setTitle}
+            description={description}
+            setDescription={setDescription}
+            putNote={putNote}
+            setPutNote={setPutNote}
+            addNote={addNote}
+            updateNote={updateNote}
+            user={user}
+            notes={notes}
+            setNotes={setNotes}
+            deleteNote={deleteNote}
+          />
+        )}
+      </body>
+      <footer
+        className={
+          contextTheme === "Dark" ? "dark text-center" : "light text-center"
+        }
+      >
+        <small>&copy; 2023 @fpolanco.tattoo, hecho con fines educativos.</small>
+      </footer>
     </div>
   );
 }

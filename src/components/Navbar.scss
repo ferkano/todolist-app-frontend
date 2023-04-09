@@ -3,24 +3,48 @@
 .navbar {
   display: flex;
   justify-content: space-between;
-  padding: 2rem 4rem 0 4rem;
-  width: 100vw;
+  padding: 2rem 2rem 0 2rem;
+  width: 100%;
   background-color: $colorSecundary;
   color: $colorBackground;
   box-shadow: 5px -15px 70px 0px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 5px -15px 70px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 5px -15px 70px 0px rgba(0, 0, 0, 0.75);
-  .navbar__buttons {
+  h2 {
+    cursor: pointer;
+  }
+  .navbar__container-buttons {
     display: flex;
-    width: 50%;
-    .navbar__buttons--ul {
+    width: 68%;
+    justify-content: end;
+    gap: 2rem;
+    .navbar__buttons {
       display: flex;
-      display: flex;
-      width: 100%;
-      justify-content: space-evenly;
-      li {
-        list-style: none;
+      align-items: center;
+      .navbar__buttons--ul {
+        display: flex;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        gap: 0.3rem;
+        li {
+          list-style: none;
+        }
       }
     }
+    .btn-dark {
+      width: 20%;
+      p {
+        font-size: 1.3rem;
+      }
+    }
+  }
+}
+.navbarDark {
+  background-color: $colorPrimaryDark;
+}
+@media (min-width: $breakpoint-tablet) {
+  .navbar__container-buttons {
+    padding-inline-end: 3rem;
   }
 }
