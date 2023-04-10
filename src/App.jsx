@@ -180,7 +180,7 @@ function App() {
           contextTheme === "Dark" ? "dark text-center" : "light text-center"
         }
       >
-        <small>&copy; 2023 @fpolanco.tattoo, hecho con fines educativos.</small>
+        <small>&copy; 2023 @fpolanco, hecho con fines educativos.</small>
       </footer>
     </div>
   );
