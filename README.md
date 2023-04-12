@@ -2,6 +2,7 @@
 
 ##### It is made with the following technologies:
 
+- Vitejs.
 - React js.
 - For styles use styled component, bootstrap and SASS.
 - Formik for form validation.
